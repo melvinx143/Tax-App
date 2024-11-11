@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <link rel="stylesheet" href="./taxer.css" />
+  <body>
+    <h1>TAX CALCULATOR</h1>
+
+    <section id="buttonz">
+      <button id="ontario">Ontario</button>
+      <button id="nb">NB</button>
+      <button id="quebec">Quebec</button>
+      <button id="alberta">Alberta</button>
+      <button id="bc">British Columbia</button>
+    </section>
+
+    <section id="innerbody">
+      <div id="inside_content">
+        <div id="left">
+          <label
+            >Your Income:<input
+              id="yourincome"
+              placeholder="$"
+              input
+              type="number"
+          /></label>
+          <label
+            >Extra Income:<input
+              id="extraincome"
+              placeholder="$"
+              input
+              type="number"
+          /></label>
+          <label
+            >Other Income:<input
+              id="otherincome"
+              placeholder="$"
+              input
+              type="number"
+          /></label>
+          <label
+            >RRSP Savings:<input id="rrsp" placeholder="$" input type="number"
+          /></label>
+        </div>
+
+        <div id="right">
+          <label>Total Income:<span id="totalincome"></span></label>
+          <label>Total Federal Taxes:<span id="federealtax"></span></label>
+          <label
+            >Total Provincial Taxes:<span id="provincialtaxes"></span
+          ></label>
+          <label>CPP/EI Premium:<span id="cpp"></span></label>
+          <label>After Taxes:<span id="aftertaxes"></span></label>
+        </div>
+      </div>
+    </section>
+    <!--script-->
+    <script src="./taxer.js"></script>
+  </body>
+</html>
