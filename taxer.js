@@ -436,7 +436,6 @@ document.getElementById("alberta").addEventListener("click", () => {
   else if (totalincome.innerHTML > 49275 && totalincome.innerHTML < 98540) {
     province = (0 + Math.abs((yourincome.value - 19369) * 0.1)).toFixed(2); //provincialtaxes.innerHTML
     provincialtaxes.innerHTML = province;
-    console.log("masti");
     console.log(province);
   }
 
@@ -509,7 +508,6 @@ document.getElementById("bc").addEventListener("click", () => {
     //15% on the first $53,359
     federals = (totalincome.innerHTML * 0.15).toFixed(2);
     federealtax.innerHTML = federals;
-    console.log("wow1");
   } else if (totalincome.innerHTML > 53359 && totalincome.innerHTML < 106717) {
     //20.5% on the next $53,359 (from $53,359 to $106,717)
     federals = (53359 * 0.15 + (yourincome.value - 53359) * 0.205).toFixed(2);
@@ -523,7 +521,6 @@ document.getElementById("bc").addEventListener("click", () => {
       Math.abs(106717 - yourincome.value) * 0.26
     ).toFixed(2);
     federealtax.innerHTML = federals;
-    console.log("wow3");
   } else if (totalincome.innerHTML > 165251 && totalincome.innerHTML < 229784) {
     //29% on the next $64,533 (from $165,251 to $229,784)
     federals = (
@@ -533,7 +530,6 @@ document.getElementById("bc").addEventListener("click", () => {
       Math.abs((165251 - yourincome.value) * 0.29)
     ).toFixed(2);
     federealtax.innerHTML = federals;
-    console.log("wow4");
   } else {
     //33% on income over $229,784
     federals = (
@@ -544,54 +540,61 @@ document.getElementById("bc").addEventListener("click", () => {
       Math.abs(229784 - yourincome.value) * 0.33
     ).toFixed(2);
     federealtax.innerHTML = federals;
-    console.log("wow5");
+   
   }
 
   //PROVINCIAL TAXES
   let province;
-  //0% on the first $13,808
-  if (totalincome.innerHTML < 13808) {
-    province = (Math.abs(yourincome.value) * 0).toFixed(2); //provincialtaxes.innerHTML
+  //5.06% on the first $47630
+  if (totalincome.innerHTML < 47630) {
+    province = (0.0506*Math.abs(yourincome.value)).toFixed(2); //provincialtaxes.innerHTML
     provincialtaxes.innerHTML = province;
     console.log(province);
   }
 
-  //5.06% on the next $43,005 (from $13,808 to $56,813)
-  else if (totalincome.innerHTML > 13808 && totalincome.innerHTML < 56813) {
-    province = (0 + Math.abs((yourincome.value - 12808) * 0.0506)).toFixed(2); //provincialtaxes.innerHTML
+  //7.7% on the next $43,005 (from $47630 to $95259)
+  else if (totalincome.innerHTML > 47630 && totalincome.innerHTML < 95259) {
+    province = ((0.0506*47630) + (Math.abs(yourincome.value - 47630) * 0.0707)).toFixed(2); //provincialtaxes.innerHTML
     provincialtaxes.innerHTML = province;
   }
 
-  //7.7% on the next $11,203 (from $56,813 to $68,016)
-  else if (totalincome.innerHTML > 56813 && totalincome.innerHTML < 68016) {
+  //10.5% on the next $20,741 (from $95259 to $116000)
+  else if (totalincome.innerHTML > 95259 && totalincome.innerHTML < 116000) {
     province = (
-      0 +
-      0.0506 * 43005 +
-      Math.abs(yourincome.value - 56813) * 0.077
+      0 +(0.0506 * 47630) +(47,629*0.0707)+
+      Math.abs(yourincome.value - 20741) * 0.105
     ).toFixed(2);
     provincialtaxes.innerHTML = province;
   }
-  //10.5% on the next $18,893 (from $68,016 to $86,909)
+  //12.29% on the next $41748 (from $116000 to $157748)
   else if (totalincome.innerHTML > 109369 && totalincome.innerHTML < 209369) {
     province = (
-      0 +
-      0.0506 * 43005 +
-      11203 * 0.077 +
-      Math.abs(yourincome.value - 68016) * 0.13
+      0 +(0.0506 * 47630) +(47,629*0.0707)+(20741*.105)+
+      (Math.abs(yourincome.value - 41748) * 0.1229)
     ).toFixed(2);
     provincialtaxes.innerHTML = province;
-    console.log(province);
   }
 
-  //14% on income over $209,369
+//14.7% for next 12,003 from 157748 to 170751
+else if (totalincome.innerHTML > 157748 && totalincome.innerHTML < 170751) {
+  province = (
+    0 +(0.0506 * 47630) +(47,629*0.0707)+(20741*.105)+(41748*.1229)
+   +(Math.abs(yourincome.value -12003) * 0.147)
+  ).toFixed(2);
+  provincialtaxes.innerHTML = province;
+}
+
+//16.8% for next 51669 from 170751 to 222420
+else if (totalincome.innerHTML > 170751 && totalincome.innerHTML < 222420) {
+  province = (
+    0 +(0.0506 * 47630) +(47,629*0.0707)+(20741*.105)+(41748*.1229)+(12003*.147)+
+    (Math.abs(yourincome.value -51669) * 0.168)
+  ).toFixed(2);
+  provincialtaxes.innerHTML = province;
+}
+// over 222420
   else {
-    province = (
-      0 +
-      0.1 * 40000 +
-      0.12 * 50000 +
-      0.13 * 100000 +
-      Math.abs(yourincome.value - 209369) * 0.2575
-    ).toFixed(2);
+    province = ((0.0506 * 47630) +(47,629*0.0707)+(20741*.105)+(41748*.1229)+(12003*.147)+(51669*.168)+(Math.abs(yourincome.value)*0.205)).toFixed(2);
     provincialtaxes.innerHTML = province;
     console.log(province);
   }
@@ -612,8 +615,5 @@ document.getElementById("bc").addEventListener("click", () => {
   aftertaxes.innerHTML =
     Number(yourincome.value) -
     [Number(cpp_contribution) + Number(province) + Number(federals)];
-  console.log(province);
-  console.log(federals);
-  console.log(cpp_contribution);
-  console.log(yourincome.value);
+
 });
